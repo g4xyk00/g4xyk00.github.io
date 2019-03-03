@@ -1,0 +1,185 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+#divHeader {
+  width: 60px; height: 60px; border: 0px solid #aaaaaa; border-radius: 10px; background: #7003af;
+}
+
+#divContentBlank {
+  width: 60px; height: 60px; border: 0px solid #aaaaaa; border-radius: 10px;
+}
+
+#divTemp {
+  width: 60px; height: 60px; border: 0px solid #aaaaaa; border-radius: 10px; background: #d7dee8;
+}
+
+#divContentLeft {
+  width: 60px; height: 60px; border: 0px solid #aaaaaa; border-radius: 10px; background: #30dbd8;
+}
+
+#divContentRight {
+  width: 60px; height: 60px; border: 0px solid #aaaaaa; border-radius: 10px; background: #23d132;
+}
+
+#divUnitLeft {
+  width: 60px; height: 60px; border: 0px solid #aaaaaa; border-radius: 10px; background: #6ecfe5;
+}
+
+#divUnitRight {
+  width: 60px; height: 60px; border: 0px solid #aaaaaa; border-radius: 10px; background: #8fe56e;
+}
+
+#divContentAnswer {
+  width: 56px; height: 56px; border: 2px solid #4f1372; border-radius: 10px; 
+}
+
+#divOption{
+  width: 50px; height: 50px; border: 0px solid #aaaaaa; border-radius: 10px; background: #eaedf2; display: inline-block;
+}
+
+#divOptionLeft {
+  width: 50px; height: 50px; border: 0px solid #aaaaaa; border-radius: 10px; background: #6ecfe5; display: inline-block;
+}
+
+#divOptionRight {
+  width: 50px; height: 50px; border: 0px solid #aaaaaa; border-radius: 10px; background: #8fe56e; display: inline-block;
+}
+
+p {
+  font-family: Tahoma, Geneva, sans-serif;
+  font-size: 16px;
+  text-align: center;
+}
+
+hr{
+	border: 3px solid #c4425e;
+	width: 590px;
+}
+</style>
+<script>
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  ev.target.appendChild(document.getElementById(data));
+}
+</script>
+
+</head>
+<body>
+
+<table>
+
+<tr>
+<th><div id="divContentBlank"></th>
+<th><div id="divHeader" ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
+<th><div id="divHeader" ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
+<th><div id="divHeader" ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
+<th><div id="divHeader" ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
+<th><div id="divHeader" ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
+<th><div id="divHeader" ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
+<th><div id="divHeader" ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
+<th><div id="divHeader" ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
+</tr>
+
+
+<tr>
+<td></td>
+<td><div id="divTemp" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divTemp" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divTemp" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentBlank" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divTemp" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divTemp" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentBlank" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentBlank" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+</tr>
+<tr>
+<td></td>
+<td><div id="divContentLeft" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentLeft" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentLeft" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divUnitLeft" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentRight" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentRight" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentRight" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divUnitRight" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+</tr>
+<tr>
+<td></td>
+<td><div id="divContentLeft" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentLeft" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentLeft" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divUnitLeft" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentRight" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentRight" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentRight" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divUnitRight" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+</tr>
+<tr>
+<td><p>+</p></td>
+<td><div id="divContentLeft" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentLeft" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentLeft" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divUnitLeft" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentRight" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentRight" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentRight" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divUnitRight" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+</tr>
+</table>
+
+<hr align="left">
+<table>
+<tr>
+<td><div id="divContentBlank" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentAnswer" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentAnswer" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentAnswer" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentAnswer" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentAnswer" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentAnswer" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentAnswer" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentAnswer" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+</tr>
+</table>
+
+<hr align="left">
+
+
+
+<table border="0">
+<tr>
+<th><div id="divOption" ondrop="drop(event)" ondragover="allowDrop(event)"><p id="drag0" draggable="true" ondragstart="drag(event)">0</p></div></th>
+<th><div id="divOption" ondrop="drop(event)" ondragover="allowDrop(event)"><p id="drag1" draggable="true" ondragstart="drag(event)">1</p></div></th>
+<th><div id="divOption" ondrop="drop(event)" ondragover="allowDrop(event)"><p id="drag2" draggable="true" ondragstart="drag(event)">2</p></div></th>
+<th><div id="divOption" ondrop="drop(event)" ondragover="allowDrop(event)"><p id="drag3" draggable="true" ondragstart="drag(event)">3</p></div></th>
+<th><div id="divOption" ondrop="drop(event)" ondragover="allowDrop(event)"><p id="drag4" draggable="true" ondragstart="drag(event)">4</p></div></th>
+<th><div id="divOption" ondrop="drop(event)" ondragover="allowDrop(event)"><p id="drag5" draggable="true" ondragstart="drag(event)">5</p></div></th>
+<th><div id="divOption" ondrop="drop(event)" ondragover="allowDrop(event)"><p id="drag6" draggable="true" ondragstart="drag(event)">6</p></div></th>
+<th><div id="divOption" ondrop="drop(event)" ondragover="allowDrop(event)"><p id="drag7" draggable="true" ondragstart="drag(event)">7</p></div></th>
+<th><div id="divOption" ondrop="drop(event)" ondragover="allowDrop(event)"><p id="drag8" draggable="true" ondragstart="drag(event)">8</p></div></th>
+<th><div id="divOption" ondrop="drop(event)" ondragover="allowDrop(event)"><p id="drag9" draggable="true" ondragstart="drag(event)">9</p></div></th>
+</tr>
+</table>
+<table border="0">
+<tr>
+<th><div id="divOptionLeft" ondrop="drop(event)" ondragover="allowDrop(event)"><p id="drag0" draggable="true" ondragstart="drag(event)">l</p></div></th>
+<th><div id="divOptionRight" ondrop="drop(event)" ondragover="allowDrop(event)"><p id="drag1" draggable="true" ondragstart="drag(event)">ml</p></div></th>
+<th><div id="divOptionLeft" ondrop="drop(event)" ondragover="allowDrop(event)"><p id="drag2" draggable="true" ondragstart="drag(event)">kg</p></div></th>
+<th><div id="divOptionRight" ondrop="drop(event)" ondragover="allowDrop(event)"><p id="drag3" draggable="true" ondragstart="drag(event)">g</p></div></th>
+<th><div id="divOptionLeft" ondrop="drop(event)" ondragover="allowDrop(event)"><p id="drag4" draggable="true" ondragstart="drag(event)">km</p></div></th>
+<th><div id="divOptionRight" ondrop="drop(event)" ondragover="allowDrop(event)"><p id="drag5" draggable="true" ondragstart="drag(event)">m</p></div></th>
+</tr>
+</table>
+
+</body>
+</html>
