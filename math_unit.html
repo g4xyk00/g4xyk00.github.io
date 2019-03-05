@@ -15,9 +15,9 @@ body {
   font-family: Tahoma, Geneva, sans-serif;
   font-weight: bold;
   font-size: 18px;
-    display: table-cell;
-    vertical-align: middle;
-    background-color: #dddddd;
+  display: table-cell;
+  vertical-align: middle;
+  background-color: #dddddd;
 }
 
 .content {
@@ -40,9 +40,11 @@ body {
 .divContentRight { background: #23d132;}
 .divUnitLeft { background: #6ecfe5; }
 .divUnitRight { background: #8fe56e; }
+
+/*
 .divHeaderLeft select { background-color: #6ecfe5; }
 .divHeaderRight select { background-color: #8fe56e; }
-
+*/
 
 .divHeaderLeft {
   background: #6ecfe5; display: inline-block; cursor: move; line-height: 60px;
@@ -97,6 +99,13 @@ body {
   background: #f44280; display: inline-block; cursor: move; border: 3px solid #fff; 
 }
 
+.optionSmall {
+  background: #8fe56e;
+}
+
+.optionBig {
+  background: #6ecfe5;
+}
 
 p {
   text-align: center;
@@ -126,12 +135,15 @@ function drag(ev) {
   //To retrieve value from item and saved to variable v
   ev.dataTransfer.setData("v", ev.target.innerText);
 
+
+
 }
 
 function drop(ev) {
   ev.preventDefault();
   var data = ev.dataTransfer.getData("v");
   ev.target.textContent = data;
+
 }
 
 function fillUnit(){
@@ -139,20 +151,114 @@ function fillUnit(){
   fillUnitRight();
 }
 
+function fillAllUnitRight(u){
+    document.getElementById('UnitRight1').innerHTML = u; 
+    document.getElementById('UnitRight2').innerHTML = u; 
+    document.getElementById('UnitRight3').innerHTML = u; 
+    document.getElementById('UnitRight4').innerHTML = u;  
+}
+
+function fillAllUnitLeft(u){
+    document.getElementById('UnitLeft1').innerHTML = u; 
+    document.getElementById('UnitLeft2').innerHTML = u; 
+    document.getElementById('UnitLeft3').innerHTML = u; 
+    document.getElementById('UnitLeft4').innerHTML = u;  
+}
+
+/**
+  Blue - #6ecfe5
+  Green - #8fe56e
+**/
+
+function fillAllUnitRightColor(c){
+    document.getElementById('UnitRight1').style.backgroundColor  = "#6ecfe5"; 
+    document.getElementById('UnitRight2').style.backgroundColor  = "#6ecfe5"; 
+    document.getElementById('UnitRight3').style.backgroundColor  = "#6ecfe5"; 
+    document.getElementById('UnitRight4').style.backgroundColor  = "#6ecfe5"; 
+}
+
+function fillAllUnitLeftColor(c){
+    document.getElementById('UnitRight1').style.backgroundColor  = "#8fe56e";
+    document.getElementById('UnitRight2').style.backgroundColor  = "#8fe56e";
+    document.getElementById('UnitRight3').style.backgroundColor  = "#8fe56e";
+    document.getElementById('UnitRight4').style.backgroundColor  = "#8fe56e";
+}
+
 function fillUnitLeft(){
-  var unit = document.getElementById("unitLeft").value;
-  document.getElementById('UnitLeft1').innerHTML = unit; 
-  document.getElementById('UnitLeft2').innerHTML = unit; 
-  document.getElementById('UnitLeft3').innerHTML = unit; 
-  document.getElementById('UnitLeft4').innerHTML = unit;
+  var v = document.getElementById("unitLeft").value;
+
+  if(v == "."){
+    document.getElementById('divHeaderLeft').style.backgroundColor  =  "#6ecfe5";
+    document.getElementById('UnitLeft').style.backgroundColor  = "#6ecfe5";
+
+    /*Filter Left Unit */
+    document.getElementById('UnitRight0').innerHTML = '<select id="unitRight" onchange="fillUnitRight()"><option class="optionBig" value="ℓ">ℓ</option><option class="optionBig" value="kg">kg</option><option class="optionBig" value="km">km</option></select>';
+
+  }else{
+        document.getElementById('divHeaderLeft').style.backgroundColor  =  "#8fe56e";
+    document.getElementById('UnitLeft').style.backgroundColor  = "#8fe56e";
+
+    /* Display All Unit*/
+      document.getElementById('UnitRight0').innerHTML = '<select id="unitRight" onchange="fillUnitRight()"><option class="optionBig" value="ℓ">ℓ</option><option class="optionSmall" value="mℓ" selected>mℓ</option><option class="optionBig" value="kg">kg</option><option class="optionSmall" value="g">g</option><option class="optionBig" value="km">km</option><option class="optionSmall" value="m">m</option></select>'
+  }
+
 }
 
 function fillUnitRight(){
   var unit = document.getElementById("unitRight").value;
-  document.getElementById('UnitRight1').innerHTML = unit; 
-  document.getElementById('UnitRight2').innerHTML = unit; 
-  document.getElementById('UnitRight3').innerHTML = unit; 
-  document.getElementById('UnitRight4').innerHTML = unit;
+
+
+  if(unit == "ℓ" ){
+    fillAllUnitLeft("ℓ");
+    fillAllUnitRight("mℓ");
+  }
+
+  if(unit == "mℓ"){
+    fillAllUnitRight("mℓ");
+  }
+
+  if(unit == "kg"){
+    fillAllUnitLeft("kg");
+    fillAllUnitRight("g");
+  }
+
+  if(unit == "g"){
+    fillAllUnitRight("g");
+  }
+
+  if(unit == "km"){
+    fillAllUnitLeft("km");
+    fillAllUnitRight("m");   
+  }
+
+  if( unit == "m"){
+    fillAllUnitRight("m");
+  }
+
+  if(unit == "ℓ" || unit =="kg" || unit == "km"){
+    document.getElementById('unitRight').style.backgroundColor = "#6ecfe5";
+    document.getElementById('UnitRight0').style.backgroundColor  = "#6ecfe5"; 
+
+    /** Move Value to Left **/
+    document.getElementById('divHeaderValue0').innerHTML  = document.getElementById('divHeaderValue1').innerHTML
+    document.getElementById('divHeaderValue1').innerHTML  = document.getElementById('divHeaderValue2').innerHTML
+    document.getElementById('divHeaderValue2').innerHTML  = document.getElementById('divHeaderLeft').innerHTML
+ 
+    /* Add Selection Menu */
+    document.getElementById('divHeaderLeft').innerHTML = '<select id="unitLeft" onchange="fillUnitLeft()"><option value=".">.</option><option value="<br/>" selected></option></select>';
+
+  }else{
+    document.getElementById('unitRight').style.backgroundColor = "#8fe56e";
+    document.getElementById('UnitRight0').style.backgroundColor  = "#8fe56e"; 
+    document.getElementById('divHeaderLeft').style.backgroundColor  = "#d69eff";
+    
+
+    /* Remove Selection Menu and Move Value to Right*/
+    document.getElementById('divHeaderLeft').innerHTML = document.getElementById('divHeaderValue2').innerHTML
+    document.getElementById('divHeaderValue2').innerHTML = document.getElementById('divHeaderValue1').innerHTML
+    document.getElementById('divHeaderValue1').innerHTML = document.getElementById('divHeaderValue0').innerHTML
+    document.getElementById('divHeaderValue0').innerHTML  = "<br/>";
+  }
 }
 
 
@@ -160,41 +266,40 @@ function refresh(){
   document.location.reload();
 }
 </script>
-
 </head>
 <body onload="fillUnit()">
 <div class="content" align="center">
 
 <table>
-
 <tr>
 <th><div class="divContentBlank"></th>
-<th><div class="divHeader" ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
-<th><div class="divHeader" ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
-<th><div class="divHeader" ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
-<th><div class="divHeaderLeft">
+<th><div class="divHeader" id="divHeaderValue0" ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
+<th><div class="divHeader" id="divHeaderValue1"  ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
+<th><div class="divHeader" id="divHeaderValue2"  ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
+<th><div class="divHeaderLeft" id="divHeaderLeft">
 <select id="unitLeft" onchange="fillUnitLeft()">
-  <option value="ℓ">ℓ</option>
-  <option value="mℓ">mℓ</option>
-  <option value="kg">kg</option>
-  <option value="g">g</option>
-  <option value="km">km</option>
-  <option value="m">m</option>
+  <option value=".">.</option>
+  <option value="<br/>" selected></option>
 </select>
 </div></th>
 <th><div class="divHeader" ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
 <th><div class="divHeader" ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
 <th><div class="divHeader" ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
-<th><div class="divHeaderRight">
+<th><div class="divHeaderRight" id="UnitRight0">
 <select id="unitRight" onchange="fillUnitRight()">
-  <option value="ℓ">ℓ</option>
-  <option value="mℓ" selected>mℓ</option>
-  <option value="kg">kg</option>
-  <option value="g">g</option>
-  <option value="km">km</option>
-  <option value="m">m</option>
+  <option class="optionBig" value="ℓ">ℓ</option>
+  <option class="optionSmall" value="mℓ" selected>mℓ</option>
+  <option class="optionBig" value="kg">kg</option>
+  <option class="optionSmall" value="g">g</option>
+  <option class="optionBig" value="km">km</option>
+  <option class="optionSmall" value="m">m</option>
 </select>
 </div></th>
+
+
+<script>
+</script>
+
 </tr>
 
 
@@ -283,12 +388,12 @@ function refresh(){
 
 <table border="0">
 <tr>
-<td><div class="divOptionLeft"><p draggable="true" ondragstart="drag(event)">ℓ</p></div></td>
-<td><div class="divOptionRight"><p draggable="true" ondragstart="drag(event)">mℓ</p></div></td>
-<td><div class="divOptionLeft"><p draggable="true" ondragstart="drag(event)">kg</p></div></td>
-<td><div class="divOptionRight"><p draggable="true" ondragstart="drag(event)">g</p></div></td>
-<td><div class="divOptionLeft"><p draggable="true" ondragstart="drag(event)">km</p></div></td>
-<td><div class="divOptionRight"><p draggable="true" ondragstart="drag(event)">m</p></div></td>
+<td><div class="divOption"><p draggable="true" ondragstart="drag(event)">ℓ</p></div></td>
+<td><div class="divOption"><p draggable="true" ondragstart="drag(event)">mℓ</p></div></td>
+<td><div class="divOption"><p draggable="true" ondragstart="drag(event)">kg</p></div></td>
+<td><div class="divOption"><p draggable="true" ondragstart="drag(event)">g</p></div></td>
+<td><div class="divOption"><p draggable="true" ondragstart="drag(event)">km</p></div></td>
+<td><div class="divOption"><p draggable="true" ondragstart="drag(event)">m</p></div></td>
 <td><div class="divOption"><p draggable="true" ondragstart="drag(event)"><br />&nbsp;</p></div></td>
 <td><div class="divOptionEmpty"><p></p></div></td>
 <td><div class="divOptionRefresh"><p onclick="refresh()">↻</p></div></td>
