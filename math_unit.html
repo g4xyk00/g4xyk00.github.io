@@ -36,10 +36,10 @@ body {
 .divHeader { background: #d69eff; }
 .divHeaderUnit { background: #e4c4fc; }
 .divTemp { background: #d7dee8; }
-.divContentLeft { background: #30dbd8; }
-.divContentRight { background: #23d132;}
-.divUnitLeft { background: #6ecfe5; }
-.divUnitRight { background: #8fe56e; }
+/* .divContentLeft { background: #30dbd8; }
+.divContentRight { background: #23d132;} */
+.divUnitLeft, .divContentLeft { background: #6ecfe5; }
+.divUnitRight, .divContentRight { background: #8fe56e; }
 
 /*
 .divHeaderLeft select { background-color: #6ecfe5; }
@@ -296,6 +296,8 @@ function moveValueToLeft(){
  
     /* Add Selection Menu */
     document.getElementById('divHeaderLeft').innerHTML = '<select id="unitLeft" onchange="fillUnitLeft()"><option value="." selected>.</option><option value="<br/>"></option></select>';
+      document.getElementById('divHeaderLeft').style.backgroundColor  =  "#6ecfe5";
+
 }
 
 function moveValueToRight(){
@@ -304,6 +306,7 @@ function moveValueToRight(){
     document.getElementById('divHeaderValue2').innerHTML = document.getElementById('divHeaderValue1').innerHTML
     document.getElementById('divHeaderValue1').innerHTML = document.getElementById('divHeaderValue0').innerHTML
     document.getElementById('divHeaderValue0').innerHTML  = "<br/>";
+
 }
 
 
