@@ -144,6 +144,33 @@ function drop(ev) {
   var data = ev.dataTransfer.getData("v");
   ev.target.textContent = data;
 
+  /** Auto Fill Header Value **/
+
+  var id = ev.target.id;
+
+  if(id == "divContentAnswer0"){
+    document.getElementById('divHeaderValue0').innerHTML = data; 
+  }
+
+  if(id == "divContentAnswer1"){
+    document.getElementById('divHeaderValue1').innerHTML = data; 
+  }
+
+  if(id == "divContentAnswer2"){
+    document.getElementById('divHeaderValue2').innerHTML = data; 
+  }
+
+  if(id == "divContentAnswer3"){
+    document.getElementById('divHeaderValue3').innerHTML = data; 
+  }
+
+  if(id == "divContentAnswer4"){
+    document.getElementById('divHeaderValue4').innerHTML = data; 
+  }
+
+  if(id == "divContentAnswer5"){
+    document.getElementById('divHeaderValue5').innerHTML = data; 
+  }
 }
 
 function fillUnit(){
@@ -192,21 +219,25 @@ function fillUnitLeft(){
     document.getElementById('UnitLeft').style.backgroundColor  = "#6ecfe5";
 
     /*Filter Left Unit */
+    /*
     document.getElementById('UnitRight0').innerHTML = '<select id="unitRight" onchange="fillUnitRight()"><option class="optionBig" value="ℓ">ℓ</option><option class="optionBig" value="kg">kg</option><option class="optionBig" value="km">km</option></select>';
+    */
 
   }else{
         document.getElementById('divHeaderLeft').style.backgroundColor  =  "#8fe56e";
     document.getElementById('UnitLeft').style.backgroundColor  = "#8fe56e";
 
     /* Display All Unit*/
-      document.getElementById('UnitRight0').innerHTML = '<select id="unitRight" onchange="fillUnitRight()"><option class="optionBig" value="ℓ">ℓ</option><option class="optionSmall" value="mℓ" selected>mℓ</option><option class="optionBig" value="kg">kg</option><option class="optionSmall" value="g">g</option><option class="optionBig" value="km">km</option><option class="optionSmall" value="m">m</option></select>'
+    /*
+      document.getElementById('UnitRight0').innerHTML = '<select id="unitRight" onchange="fillUnitRight()"><option class="optionBig" value="ℓ">ℓ</option><option class="optionSmall" value="mℓ" selected>mℓ</option><option class="optionBig" value="kg">kg</option><option class="optionSmall" value="g">g</option><option class="optionBig" value="km">km</option><option class="optionSmall" value="m">m</option></select>';
+      */
   }
 
 }
 
 function fillUnitRight(){
   var unit = document.getElementById("unitRight").value;
-
+  var selectedUnit = document.getElementById("UnitRight1").innerHTML;
 
   if(unit == "ℓ" ){
     fillAllUnitLeft("ℓ");
@@ -214,6 +245,7 @@ function fillUnitRight(){
   }
 
   if(unit == "mℓ"){
+    fillAllUnitLeft("ℓ");
     fillAllUnitRight("mℓ");
   }
 
@@ -223,6 +255,7 @@ function fillUnitRight(){
   }
 
   if(unit == "g"){
+    fillAllUnitLeft("kg");
     fillAllUnitRight("g");
   }
 
@@ -232,33 +265,45 @@ function fillUnitRight(){
   }
 
   if( unit == "m"){
+    fillAllUnitLeft("km");
     fillAllUnitRight("m");
   }
 
   if(unit == "ℓ" || unit =="kg" || unit == "km"){
     document.getElementById('unitRight').style.backgroundColor = "#6ecfe5";
     document.getElementById('UnitRight0').style.backgroundColor  = "#6ecfe5"; 
+  }else{
+    document.getElementById('unitRight').style.backgroundColor = "#8fe56e";
+    document.getElementById('UnitRight0').style.backgroundColor  = "#8fe56e"; 
+    document.getElementById('divHeaderLeft').style.backgroundColor  = "#d69eff";
+  }
 
-    /** Move Value to Left **/
+  if((unit == "ℓ" && selectedUnit == "mℓ") || (unit == "kg" && selectedUnit == "g") || (unit == "km" && selectedUnit == "m") ){
+    moveValueToLeft();
+  }
+
+  if((unit == "mℓ" && selectedUnit == "mℓ") ||(unit == "g" && selectedUnit == "g") || (unit == "m" && selectedUnit == "m") ){
+    moveValueToRight();
+  }
+
+}
+
+function moveValueToLeft(){
+      /** Move Value to Left **/
     document.getElementById('divHeaderValue0').innerHTML  = document.getElementById('divHeaderValue1').innerHTML
     document.getElementById('divHeaderValue1').innerHTML  = document.getElementById('divHeaderValue2').innerHTML
     document.getElementById('divHeaderValue2').innerHTML  = document.getElementById('divHeaderLeft').innerHTML
  
     /* Add Selection Menu */
-    document.getElementById('divHeaderLeft').innerHTML = '<select id="unitLeft" onchange="fillUnitLeft()"><option value=".">.</option><option value="<br/>" selected></option></select>';
+    document.getElementById('divHeaderLeft').innerHTML = '<select id="unitLeft" onchange="fillUnitLeft()"><option value="." selected>.</option><option value="<br/>"></option></select>';
+}
 
-  }else{
-    document.getElementById('unitRight').style.backgroundColor = "#8fe56e";
-    document.getElementById('UnitRight0').style.backgroundColor  = "#8fe56e"; 
-    document.getElementById('divHeaderLeft').style.backgroundColor  = "#d69eff";
-    
-
-    /* Remove Selection Menu and Move Value to Right*/
+function moveValueToRight(){
+      /* Remove Selection Menu and Move Value to Right*/
     document.getElementById('divHeaderLeft').innerHTML = document.getElementById('divHeaderValue2').innerHTML
     document.getElementById('divHeaderValue2').innerHTML = document.getElementById('divHeaderValue1').innerHTML
     document.getElementById('divHeaderValue1').innerHTML = document.getElementById('divHeaderValue0').innerHTML
     document.getElementById('divHeaderValue0').innerHTML  = "<br/>";
-  }
 }
 
 
@@ -274,17 +319,17 @@ function refresh(){
 <tr>
 <th><div class="divContentBlank"></th>
 <th><div class="divHeader" id="divHeaderValue0" ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
-<th><div class="divHeader" id="divHeaderValue1"  ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
-<th><div class="divHeader" id="divHeaderValue2"  ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
+<th><div class="divHeader" id="divHeaderValue1" ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
+<th><div class="divHeader" id="divHeaderValue2" ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
 <th><div class="divHeaderLeft" id="divHeaderLeft">
 <select id="unitLeft" onchange="fillUnitLeft()">
   <option value=".">.</option>
   <option value="<br/>" selected></option>
 </select>
 </div></th>
-<th><div class="divHeader" ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
-<th><div class="divHeader" ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
-<th><div class="divHeader" ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
+<th><div class="divHeader" id="divHeaderValue3" ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
+<th><div class="divHeader" id="divHeaderValue4" ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
+<th><div class="divHeader" id="divHeaderValue5" ondrop="drop(event)" ondragover="allowDrop(event)"></div></th>
 <th><div class="divHeaderRight" id="UnitRight0">
 <select id="unitRight" onchange="fillUnitRight()">
   <option class="optionBig" value="ℓ">ℓ</option>
@@ -353,13 +398,13 @@ function refresh(){
 <table>
 <tr>
 <td><div class="divContentBlank" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
-<td><div class="divContentAnswer" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
-<td><div class="divContentAnswer" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
-<td><div class="divContentAnswer" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentAnswer0" class="divContentAnswer" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentAnswer1" class="divContentAnswer" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentAnswer2" class="divContentAnswer" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
 <td><div class="divContentAnswerLeft" id="UnitLeft4" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
-<td><div class="divContentAnswer" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
-<td><div class="divContentAnswer" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
-<td><div class="divContentAnswer" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentAnswer3" class="divContentAnswer" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentAnswer4" class="divContentAnswer" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+<td><div id="divContentAnswer5" class="divContentAnswer" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
 <td><div class="divContentAnswerRight" id="UnitRight4" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
 </tr>
 </table>
