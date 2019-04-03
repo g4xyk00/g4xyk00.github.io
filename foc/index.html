@@ -17,10 +17,17 @@
         text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 3px darkred;
     }
 </style>
+<script>
+document.addEventListener('click', musicPlay);
+function musicPlay() {
+    document.getElementById('music').play();
+    document.removeEventListener('click', musicPlay);
+}
+</script>
 </head>
 
 <body onload="fillUnit()">
-
+<audio autoplay loop id="music"><source src="https://g4xyk00.github.io/foc/Quirky - AShamaluevMusic.mp3" type="audio/mpeg"></audio>
     <h2>FIX, OPERATE &amp; CONVERT(FOC) 2.0</h2>
     <h3>LY2019001014 </h3> &nbsp;&nbsp;<a href="https://drive.google.com/open?id=15sRRAYns8aSR4KrYQsZHy5lJdNYvwFya" target="_blank">Click here to find out more about
         FOC 2.0 !</a>
